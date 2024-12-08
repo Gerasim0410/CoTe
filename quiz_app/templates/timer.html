@@ -1,0 +1,10 @@
+{% load static %}
+<div class="timer">
+    <div class="progress-container progress mt-3">
+        <div class="progress-bar"  id="progress-bar" role="progressbar" 
+        style="width: 100%; transition: none; color: transparent;" aria-valuenow="100" 
+        aria-valuemin="0" aria-valuemax="100">
+          {{timer_seconds }}</div>
+    </div>
+</div>
+<script src="{% static 'js/timer.js' %}"></script>

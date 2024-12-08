@@ -1,0 +1,47 @@
+<!-- shapes.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Visual and Color Test{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/visual_plus_color.css' %}">
+{% endblock %}
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+{% block content %}
+
+<div class="row text-center">
+  {% if 'shapes' in test_url and not 'color' in test_url and not 'spatial' in test_url %}
+  <button class="col col-green" onclick="selectAnswer(2)">
+    <p class="text-bg"> ДА </p><!--Одинаковая форма--></button>
+  {% endif %}
+  {% if 'color' in test_url and not 'shape' in test_url %}
+  <button class="col col-green" onclick="selectAnswer(3)">
+    <p class="text-bg"> ДА </p><!--Одинаковый цвет--></button>
+  {% endif %}
+  {% if 'color' in test_url and 'shape' in test_url %}
+  <button class="col col-green" onclick="selectAnswer(1)">
+    <p class="text-bg"> ДА </p><!--Одинаковые форма и цвет--></button>
+  {% endif %}
+  {% if 'spatial' in test_url and not 'shape' in test_url %}
+  <button class="col col-green" onclick="selectAnswer(4)">
+    <p class="text-bg"> ДА </p><!--Одинаковая позиция--></button>
+  {% endif %}
+  {% if 'spatial' in test_url and 'shape' in test_url %}
+  <button class="col col-green" onclick="selectAnswer(5)">
+    <p class="text-bg"> ДА </p><!--Одинаковая форма и позиция--></button>
+  {% endif %}
+  <button class="col col-red" onclick="selectAnswer(6)">
+    <p class="text-bg"> НЕТ </p><!--Все разное--></button>
+
+</div>
+
+<div class="shapes-area">
+  <div class="shapes-container" id="shapes-container"></div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/submit.js' %}" data-test_url="{{ test_url }}" data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/visual_plus_color.js' %}" data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

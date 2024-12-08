@@ -1,0 +1,36 @@
+<!-- arithmetic_test.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Арифметический тест{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/arithm.css' %}">
+{% endblock %}
+
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+
+{% block content %}
+
+  <div class="row text-center">
+   <button class="col col-green" onclick="selectAnswer(1)">
+       <p class="text-bg">ДА</p>
+   </button>
+   <button class="col col-red" onclick="selectAnswer(0)">
+       <p class="text-bg">НЕТ</p>
+   </button>
+  </div>
+  <div class="row no-bg text-center">
+    <p class="question m-0" style = "height: 0vh !important" id="question">Equation or Question Text</p>   
+  </div>
+
+{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/select.js' %}"></script>
+<script src="{% static 'js/submit.js' %}" 
+  data-test_url="{{ test_url }}"
+  data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/arithm.js' %}"
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

@@ -1,0 +1,38 @@
+<!-- munster_test.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Тест Мюнстерберга{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/munster.css' %}">
+{% endblock %}
+
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+
+{% block content %}
+{% if user.user_id == 1 %}
+<div class="row">
+  <div class="matrix-container" id="matrix"></div>
+
+</div>
+{% endif %}
+
+{% if user.user_id != 1 %}
+<div class="submit-form">
+  <input type="text" id="word-input" placeholder=" Введите слово" />
+  <br>
+  <button class="m-3 btn btn-primary" onclick="submitWord()">Проверить слово</button>
+</div>
+
+<div class="submitted-words">
+  <h3>Найденные слова:</h3>
+  <ul id="submitted-words-list"></ul>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/submit.js' %}" data-test_url="{{ test_url }}" data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/munster.js' %}" data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+
+<div class="row text-center mt-3">
+  <h3>ГЛАВНАЯ СТРАНИЦА</h3>
+</div>
+{% if user.user_id == 1 %}
+<div class="row text-center">
+  <p>
+    <img src="static/qr-code-rus.png" alt="qr">
+  </p>
+</div>
+<div class="row text-center">
+  <h4> Подключитесь к сети Wi-Fi Cognitest (пароль: 12121212) и перейдите по QR-коду для регистрации в тесте</h4>
+</div>
+{% endif %}
+
+
+{% if request.user.is_authenticated %}
+{% if user.user_id != 1 %}
+<div class="row text-center mt-5">
+  <h4>Вы авторизировались по ID {{user.user_id}}. Дождитесь сигнала администратора для того, чтобы начать тест.</h4>
+</div>
+{% endif %}
+<div class="row text-center">
+  <a href="/start_test/"><button class="btn btn-primary mt-2">Начать тест</button></a>
+    <a href="/logout/">
+      <button class="btn btn-primary mt-2">Выйти</button>
+    </a>
+    </div>
+{% else %}
+
+<div class="row text-center">
+  <a href="{% url 'login' %}"><button class="btn btn-primary mt-2">Войти</button></a>
+
+</div>
+<div class="row text-center">
+  <a href="{% url 'register' %}"><button class="btn btn-primary mt-2">
+      Зарегистрироваться</button></a>
+
+</div>
+{% endif %}
+
+{% endblock %}

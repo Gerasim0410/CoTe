@@ -1,0 +1,59 @@
+<!-- instruction.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+{% block title %}Инструкция к тесту {{ test_name }}{% endblock %}
+
+{% block content %}
+{% if user.user_id != 1 %}
+<div class="container mt-3 pt-3">
+  <div class="row text-center">
+    <h3 class="mt-3 fs-2">Инструкция к тесту {{ test_name }}</h3>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <p class="mt-3 fs-4">
+        {{ test_instr }}
+      </p>
+      
+      <div class="row text-center">
+        <h3 class="mt-3 fs-2"> Дождитесь сигнала администратора для перехода к тесту...</h3>
+      </div>
+      
+      {% if user.user_id != 1 or test == 'munster' or test == 'raven' %}
+      <a href="{% url 'test' test %}">
+        <button class="btn btn-primary mt-2">Перейти к тесту
+        </button></a>
+      {% else %}
+      <a href="{% url 'instruction' next_test %}">
+        <button class="btn btn-primary mt-2">Перейти к следующей инструкции
+        </button></a>
+      {% endif %}
+{% else %}
+<div class="container mt-5 pt-5">
+  <div class="row text-center">
+    <h3 class="mt-5 fs-1">Инструкция к тесту {{ test_name }}</h3>
+  </div>
+  <div class="row text-center">
+    <div class="col">
+      <p class="mt-3 fs-3">
+        {{ test_instr }}
+      </p>
+      {% if user.user_id != 1 or test == 'munster' or test == 'raven' %}
+      <a href="{% url 'test' test %}">
+        <button class="btn btn-primary mt-2 fs-3">Перейти к тесту
+        </button></a>
+      {% else %}
+      <a href="{% url 'instruction' next_test %}">
+        <button class="btn btn-primary mt-2 fs-3">Перейти к следующей инструкции
+        </button></a>
+      {% endif %}
+{% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

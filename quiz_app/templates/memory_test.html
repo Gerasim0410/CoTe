@@ -1,0 +1,31 @@
+<!-- memory_test.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Тест на память{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/arithm.css' %}">
+{% endblock %}
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+{% block content %}
+<div class="row text-center">
+  <p class="question mt-3" id="question" style="font-size: 24px;"></p>
+  <div class="answers col-4 col-sm-6" id="answers">
+    <p class="m-0" id="answer" style="font-size: 48px; top: 3em !important"></p></div>
+</div>
+<div class="row text-center"> 
+<button class="col col-green" style = "height: 55vh !important" onclick="selectAnswer(1)">
+      <p class="text-bg">ДА</p>
+  </button>
+<button class="col col-red" style = "height: 55vh !important" onclick="selectAnswer(0)">
+          <p class="text-bg">НЕТ</p>
+      </button></div>
+{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/submit.js' %}" 
+  data-test_url="{{ test_url }}"
+  data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/memory.js' %}"
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

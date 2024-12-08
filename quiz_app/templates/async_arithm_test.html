@@ -1,0 +1,25 @@
+<!-- async_arithmetic_test.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Арифметический тест{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/arithm.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="question-container">
+        <button onclick="selectAnswer(1)">
+            <p class="question" id="question"></p>
+        </button>
+    </div>
+{% endblock %}
+
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/async_arithm.js' %}" 
+  data-test_name="{{ test }}" 
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

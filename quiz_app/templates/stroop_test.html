@@ -1,0 +1,25 @@
+<!-- stroop_test.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Тест Струпа{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/stroop.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="question-container mb-5">
+        <p class="question" id="question"></p>
+    </div>
+    <div class="answers" style="margin-top: 4em;" id="answers"></div>
+{% endblock %}
+
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+
+{% block extra_js %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/select.js' %}"></script>
+<script src="{% static 'js/submit.js' %}" 
+  data-test_url="{{ test_url }}"
+  data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/stroop.js' %}"
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endblock %}

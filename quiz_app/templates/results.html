@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Результаты теста</title>
+</head>
+<body>
+    <h1>Результаты теста</h1>
+    <table border="1">
+        <tr>
+            <th>Участник ID</th>
+            <th>Время отправки</th>
+            <th>Тип теста</th>
+            <th>Номер вопроса</th>
+            <th>Ответ</th>
+            <th>Правильность</th>
+            <th>Время затраченное на ответ</th>
+            <th>Код ошибки</th>
+        </tr>
+        {% for answer in answers %}
+        <tr>
+            <td>{{ answer.participant.participant_id }}</td>
+            <td>{{ answer.sent_time }}</td>
+            <td>{{ answer.test_type }}</td>
+            <td>{{ answer.question_number }}</td>
+            <td>{{ answer.answer_text }}</td>
+            <td>
+                {% if answer.is_correct %}
+                    Верно
+                {% else %}
+                    Неверно
+                {% endif %}
+            </td>
+            <td>{{ answer.time_taken }}</td>
+            <td>{{ answer.error_code }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'home' %}">Начать новый тест</a>
+</body>
+</html>

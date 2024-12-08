@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load custom_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+    <!-- Add DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+</head>
+<body>
+    <h1>Item List</h1>
+
+    <table id="itemTable" class="display">
+        <thead>
+            <tr>
+                <th>#</th>
+                {% for field in fields %}
+                    <th>{{ field|capfirst }}</th>
+                {% endfor %}
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% if items %}
+            {% for item in items %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    {% for field in fields %}
+                        <td>
+                        {% if item|attr:field %}
+                            {{ item|attr:field }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                        </td>
+                    {% endfor %}
+                    <td>
+                        <a href="{% url 'results:item_update' model item.pk %}">Edit</a> |
+                        <a href="{% url 'results:item_delete' model item.pk %}">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="{{ column_count }}">No items found</td>
+                </tr>
+            {% endfor %}
+          {% endif %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'results:item_create' model %}">Create New Item</a>
+    <a href="{% url 'results:available_models' %}">Go back to models</a>
+
+    <!-- Add jQuery and DataTables JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#itemTable').DataTable(); // Initialize DataTables
+        });
+    </script>
+</body>
+</html>
+

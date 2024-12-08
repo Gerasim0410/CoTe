@@ -1,0 +1,11 @@
+**Archiwum**
+**Talks**
+**lock**
+**venv**
+**cache**
+**когни**
+*.pyc
+__pycache__/
+venv/
+.env
+.vscode

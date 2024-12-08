@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detailed Results</title>
+</head>
+<body>
+    <h1>Detailed Results by User</h1>
+    {% for user_id, user_results in results_by_user.items %}
+        {% if user_id != 1 %}
+        <h2>User ID: {{ user_id }}</h2>
+        
+        {% for test_type, data in user_results.items %}
+            <h3>{{ test_type|capfirst }}:</h3>
+            {% if 'STROOP' in test_type or 'ARITHM' in test_type or 'RAVEN' in test_type %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Times taken</th>
+                        <th>Answer Num</th>
+                        <th>Given Answer</th>
+                        <th>Right Answer</th>
+                        <!-- Add more columns if needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for answer in data.answers %}
+                        <tr>
+                            <td>{{ answer.result }}</td>
+                            <td>{{ answer.answer_num }}</td>
+                            <td>{{ answer.given_answer }}</td>
+                            <td>{{ answer.right_answer }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Times taken</th>
+                        <th>Answer Num</th>
+                        <th>Given Answer</th>
+                        <th>Right Answer</th>
+                        <!-- Add more columns if needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for answer in data.answers %}
+                        <tr>
+                            <td>{{ answer.result }}</td>
+                            <td>{{ answer.answer_num }}</td>
+                            <td>{{ answer.given_answer }}</td>
+                            <td>{{ answer.right_answer }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        {% endfor %}
+        {% endif %}
+    {% endfor %}
+
+    <a href="{% url 'results:available_models' %}">Back to models</a>
+</body>
+</html>

@@ -1,0 +1,48 @@
+.navbar {
+    background-color: blue;
+    overflow: hidden;
+    width: 100%
+}
+.navbar-collapse {
+    position: absolute;
+    /* Adjust based on your navbar height */
+    top: 56px; 
+    width: 100%;
+    z-index: 999;
+    /* Makes it slightly transparent */
+    background-color: rgba(0, 0, 0, 0.9); 
+    transition: top 0.3s ease;
+}
+
+.navbar-collapse.collapse.show {
+    /* Fix the position when open */
+    position: fixed; 
+}
+
+body {
+    /* Ensures that content starts below the navbar */
+    margin-top: 56px; 
+}
+.navbar a, .navbar form {
+    float: center;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+.navbar .right {
+    float: right;
+}
+
+@media (max-width: 600px) {
+    .navbar a, .navbar form {
+        float: none;
+        width: 100%;
+        text-align: left;
+    }
+}

@@ -1,0 +1,58 @@
+.col-green {
+    outline: none; /* Убирает стандартный контур кнопки */
+    border: none;
+    background-color: rgba(172, 255, 227, 0.5);
+    height: 60vh;
+    position: relative;
+    margin-top: 2em;
+}
+
+.col-red {
+    outline: none; /* Убирает стандартный контур кнопки */
+    border: none;
+    background-color:rgb(249, 164, 164, 0.5);
+    height: 60vh;
+    position: relative;
+    margin-top: 2em;
+}
+
+.text-bg {
+    margin-top: 1em;
+    color: rgb(146, 146, 146);
+}
+
+
+.no-bg {
+    background-color: transparent;
+    
+    margin: 0 auto;
+}
+
+.no-bg img, .no-bg p, #answer{
+    height: 1em;
+    width: 25em;
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+}
+
+button:disabled {
+    background-color: rgba(127, 127, 127, 0.5); /* Darker background for disabled buttons */
+    opacity: 0.6; /* Slight transparency for a "disabled" feel */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+
+.no-bg h1 {
+
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    font-weight: 400 !important;
+}
+.answers {
+    display: inline;
+}

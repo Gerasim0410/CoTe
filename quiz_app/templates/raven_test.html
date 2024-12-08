@@ -1,0 +1,45 @@
+<!-- raven_test.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Тест Равена{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/raven.css' %}">
+{% if user.user_id != 1 %}
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/raven_client.js' %}"
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+{% endif %}
+{% endblock %}
+{% block timer %}{% include 'timer.html' %}{% endblock %}
+{% block content %}
+  {% if user.user_id == 1 %}
+    <div class="question-container" >
+        <div class="question" id="question">
+            <img id="question-image" style="width: 95%"src="" alt="Raven Test Question Image" />
+        </div>
+        <div class="answers" style="margin-left: 35%;" id="answers"></div>
+    </div>
+{{ questions|json_script:"questions" }}
+<script src="{% static 'js/select.js' %}"></script>
+<script src="{% static 'js/submit.js' %}" 
+  data-test_url="{{ test_url }}"
+  data-csrf-token="{{ csrf_token }}"></script>
+<script src="{% static 'js/raven.js' %}"
+  data-timer_seconds="{{ timer_seconds|escapejs }}"></script>
+  {% else %}
+    <div class="answers mt-5 center" id="answers">
+      <button class='btn answer-btn' onclick="selectAnswer(1)">1</button>
+      <button class='btn answer-btn' onclick="selectAnswer(2)">2</button>
+      <button class='btn answer-btn' onclick="selectAnswer(3)">3</button>
+      <button class='btn answer-btn' onclick="selectAnswer(4)">4</button>
+      <button class='btn answer-btn' onclick="selectAnswer(5)">5</button>
+      <button class='btn answer-btn' onclick="selectAnswer(6)">6</button>
+      <button class='btn answer-btn' onclick="selectAnswer(7)">7</button>
+      <button class='btn answer-btn' onclick="selectAnswer(8)">8</button>
+  </div>
+  <script src="{% static 'js/select.js' %}"></script>
+  <script src="{% static 'js/submit.js' %}" 
+    data-test_url="{{ test_url }}"
+    data-csrf-token="{{ csrf_token }}"></script>
+  {% endif %}
+{% endblock %}

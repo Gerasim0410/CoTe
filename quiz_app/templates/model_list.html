@@ -1,0 +1,19 @@
+<!-- templates/model_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Models</title>
+</head>
+<body>
+    <h1>Available Models</h1>
+    <ul>
+        {% for model in models %}
+            <li><a href="{% url 'results:item_list' model %}">{{ model }}</a></li>
+        {% endfor %}
+        <p><a href="{% url 'results:detailed_results' %}">Details</a></p>
+    </ul>
+</body>
+</html>
+
