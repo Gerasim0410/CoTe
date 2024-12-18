@@ -22,9 +22,9 @@ SECRET_KEY = 'django-insecure-hhj^m@suioa72(l=5#)t#sd04yfyj2!h6nw(_k' + \
     'mknel@pk%yqa'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.108', '192.168.1.94']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.108', '192.168.1.94', 'cognitest-nn.ru']
 
 # Application definition
 

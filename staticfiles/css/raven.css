@@ -1,0 +1,24 @@
+.question {
+    text-align: center;
+    margin: 0.5em;
+}
+.answers {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 2fr);
+    gap: 10px;
+    margin: 0 auto;
+}
+.answer-btn {
+    font-size: 2rem; /* Увеличение размера текста */
+    padding: 10px 10px; /* Увеличение внутреннего отступа */
+    height: 2em; /* Высота кнопки */
+    color:rgb(4, 4, 189);
+    border: 2px solid #0f038b;
+}
+
+button:disabled {
+    background-color: rgba(127, 127, 127, 0.5); /* Darker background for disabled buttons */
+    opacity: 0.6; /* Slight transparency for a "disabled" feel */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}

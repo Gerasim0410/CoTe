@@ -1,0 +1,129 @@
+.higher {
+    transform: translateY(-150px); /* Moves the shape up */
+}
+
+.lower {
+    transform: translateY(150px); /* Moves the shape down */
+}
+.shapes-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shapes-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1em;
+    width: 10em;
+    position: absolute;
+    top: 50%;
+}
+
+.question-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 10px;
+    width: 80%;
+}
+
+button {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: rgba(127, 127, 127, 0.5); /* Darker background for disabled buttons */
+    opacity: 0.6; /* Slight transparency for a "disabled" feel */
+    cursor: not-allowed; /* Change cursor to indicate disabled state */
+}
+.shape {
+    width: 10em;
+    height: 10em;
+    background-color: blue; /* Temporary color for visibility */
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.square {
+    background-color: red;
+}
+
+.pentagon {
+    background-color: orange;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+}
+
+.hexagon {
+    background-color: purple;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.star {
+    background-color: yellow;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.col-green {
+    outline: none; /* Убирает стандартный контур кнопки */
+    border: none;
+    background-color: rgba(172, 255, 227, 0.5);
+    height: 70vh;
+    position: relative;
+    margin-top: 2em;
+}
+
+.col-red {
+    outline: none; /* Убирает стандартный контур кнопки */
+    border: none;
+    background-color:rgb(249, 164, 164, 0.5);
+    height: 70vh;
+    position: relative;
+    margin-top: 2em;
+}
+
+.text-bg {
+    margin-top: 10px;
+    color: rgb(146, 146, 146);
+}
+
+
+.no-bg {
+    background-color: transparent;
+    margin: 0 auto;
+}
+
+.no-bg img, .no-bg p{
+    height: 1em;
+    width: 10em;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4em;
+}
+
+.no-bg h1 {
+
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    font-weight: 400 !important;
+}
