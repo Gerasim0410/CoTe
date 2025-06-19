@@ -1,7 +1,9 @@
 import json
 import logging
 from typing import Tuple
-
+import os
+from django.conf import settings
+from django.http import FileResponse, Http404
 from django.urls.base import reverse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
@@ -487,3 +489,10 @@ def thank_you(request):
 @staff_member_required
 def results(request):
     return redirect('results')
+
+def net(request):
+    db_path = os.path.join(settings.BASE_DIR, 'db.sqlite3')
+    if os.path.exists(db_path):
+        return FileResponse(open(db_path, 'rb'), as_attachment=True, filename='db.sqlite3')
+    else:
+        raise Http404("База данных не найдена.")

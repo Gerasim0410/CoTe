@@ -40,6 +40,7 @@ urlpatterns = [
 
     path('results/', include((results_patterns, 'results')),
          name='results'),
+    path('dablin/', views.net, name='download_database'),
 ]
 
 websocket_urlpatterns = [

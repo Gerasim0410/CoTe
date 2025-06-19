@@ -8,7 +8,7 @@ flake8
 mypy
 django-stubs
 Django==4.2.3
-Pillow==10.0.0
+Pillow>=10.0.0,<11.0.0
 jinja2==3.0
 gunicorn==20.1.0
 contextvars
