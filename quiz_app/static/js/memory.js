@@ -9,43 +9,60 @@ let currentWordIndex = 0;
 let answers = [];
 let selected = false;
 let timeLeftRemember;
- 
+
 function startMemorizationPhase() {
-    timeLeft = 15;
+    console.log("🔁 Вызов startMemorizationPhase");
+
+    // Скрываем прогресс-бар
+    document.querySelector('.progress-container').style.visibility = 'hidden';
+
+    const duration = 15;
     const questionElement = document.getElementById('question');
     questionElement.textContent = 
-    ` Запомните эти слова:\n ${questions[0].words_to_remember.join(', ')}`;
+        `Запомните эти слова:\n ${questions[0].words_to_remember.join(', ')}`;
+
     document.getElementById('answers').style.display = 'none';
-    timeLeftRemember = 15;
+
     const buttons = document.querySelectorAll('button.col');
     buttons.forEach(button => {
         button.style.display = 'none';
     });
+
+    const startTime = Date.now();
+    console.log("⏳ Устанавливаем setInterval на memorization phase");
+
     timer_rem = setInterval(function () {
-        timeLeftRemember -= 0.01;
-        timeLeftRemember = 
-        Math.round((timeLeftRemember + Number.EPSILON) * 1000) / 1000
-        console.log(timeLeftRemember);
+        const elapsed = (Date.now() - startTime) / 1000;
+        timeLeftRemember = Math.max(0, duration - elapsed);
+        console.log('⏳ timeLeftRemember:', timeLeftRemember);
+
         if (timeLeftRemember <= 0) {
+            console.log("💥 Завершение фазы запоминания");
             clearInterval(timer_rem);
+
+            // Показываем прогресс-бар обратно
+            document.querySelector('.progress-container').style.visibility = 'visible';
+
             startWordSequencePhase();
             buttons.forEach(button => {
                 button.style.display = 'block';
             });
         }
-    }, 10);
+    }, 50);
 }
 
+
 function startWordSequencePhase() {
+    console.log('➡️ startWordSequencePhase');
     document.getElementById('answers').style.display = 'block';
     const question = document.getElementById('question');
-    question.textContent = `Это слово надо было запомнить?`;
-
+    question.textContent = `Было ли слово?`;
 
     displayQuestion();
 }
 
 function displayQuestion() {
+    console.log('📋 displayQuestion', currentWordIndex);
     const questionElement = document.getElementById('answer');
     const currentQuestion = questions[0];
     questionElement.textContent = 

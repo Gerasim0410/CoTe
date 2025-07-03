@@ -1,44 +1,49 @@
 let timer; 
 const progressBar = document.getElementById('progress-bar');
 const totalTime = parseFloat(progressBar.textContent); 
-let timeLeft = totalTime;
-function resetTimer() {
-    timeLeft = totalTime; 
-    // progressBar.textContent = timeLeft.toFixed(1);
-    clearInterval(timer);
-    timer = setInterval(function () {
-        timeLeft -= 0.01;
-        // progressBar.textContent = timeLeft.toFixed(1);
+let questionStart = null;
+let timeLeft = totalTime; // видимое значение, которое будет пересчитываться каждый тик
 
-        // Update the progress bar width
+function resetTimer() {
+    console.log('⏱ resetTimer');
+    clearInterval(timer);
+    questionStart = Date.now();
+
+    timer = setInterval(function () {
+        // пересчитываем оставшееся время на лету
+        const elapsed = (Date.now() - questionStart) / 1000;
+        timeLeft = Math.max(0, totalTime - elapsed); // чтобы значение не ушло в минус
+
+        // обновляем прогрессбар
         const progressPercent = (timeLeft / totalTime) * 100;
         progressBar.style.width = progressPercent + '%';
 
+        // если закончилось время
         if (timeLeft <= 0) {
-            console.log('in if');
-            timeLeft = 0;
             clearInterval(timer);
+            timeLeft = 0; // фиксируем
+
             if (!selected) {
                 selectAnswer(null); 
             }
-            document.getElementById('answer-catched')
-            .textContent = "";
-            if (document.getElementsByTagName('button')) {
-                Array.from(document.getElementsByTagName('button'))
-                .forEach((button) => {
+            document.getElementById('answer-catched').textContent = "";
+
+            const buttons = document.getElementsByTagName('button');
+            if (buttons) {
+                Array.from(buttons).forEach((button) => {
                     button.disabled = false;
                 });
             }
-            if (document.getElementById('question-image')) {
-                Array.from(document.getElementById('question-image'))
-                .forEach((button) => {
-                    button.onclick = null;
-                });
+
+            const image = document.getElementById('question-image');
+            if (image) {
+                image.onclick = null;
             }
+
             selected = false;
             displayQuestion();
         }
-    }, 10);
+    }, 50); // 50 мс достаточно часто, без перегрузки
 }
 
 resetTimer();
